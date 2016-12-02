@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        //M C X I 1000/100/10/1
+        //D L V  500/50/5
+        
+        //left I(V,X); X(L,C); C(D,M)
+        std::map<char,int> rN;
+        rN.insert(std::make_pair('I',1));
+        rN.insert(std::make_pair('X',10));
+        rN.insert(std::make_pair('C',100));
+        rN.insert(std::make_pair('M',1000));
+        rN.insert(std::make_pair('V',5));
+        rN.insert(std::make_pair('L',50));
+        rN.insert(std::make_pair('D',500));
+        
+        int size = s.size();
+        int num = 0;
+        int temp = 0;
+        int temp1 = 0;
+        for(int i =0; i < size; i++)
+        {
+            temp = rN.at(s[i]);
+            if( (temp == 1) || (temp == 10) || (temp ==100))
+            {
+               //might 
+               i++;
+               if( i < size)
+               {
+                  temp1 = rN.at(s[i]);
+                  if(temp1 > temp) 
+                  {
+                      num += temp1-temp;
+                      continue;
+                  }
+               }  
+               
+               i--;
+                
+            }
+            num+=temp;
+            
+        }
+        
+        return num;
+        
+        
+        
+    }
+};
