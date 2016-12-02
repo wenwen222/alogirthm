@@ -1,0 +1,62 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        std::sort(nums.begin(),nums.end());
+        
+        int i = 0;
+        int tmp1, tmp2, tmp3;
+        vector<vector<int>> result;
+        //find zero start
+        while( i < nums.size() && nums[i] <= 0)
+        {
+            tmp1 = nums[i];
+            i++;
+            twoSum(nums, -tmp1, i, result) ;
+            
+            while( i < nums.size() && nums[i] == tmp1)
+               i++;
+            
+        }
+        
+        return result;
+    }
+    
+    bool twoSum(vector<int>& nums, int sum, int start, vector<vector<int>>& result)
+    {
+        int i = start;
+        int j = nums.size()-1;
+        int tmp = sum;
+        int tmp1, tmp2;
+        while(i < j)
+        {
+            tmp = nums[i] + nums[j];
+            if( tmp == sum)
+            {
+                vector<int> re;
+                re.push_back(-sum);
+                re.push_back(nums[i]);
+                re.push_back(nums[j]);  
+                result.push_back(re);
+                tmp1 = nums[i];
+                tmp2 = nums[j];
+                while( i< nums.size() && tmp1 == nums[i] )
+                        i++;
+                while ( j < nums.size() && tmp2 == nums[j])
+                         j--;
+            }
+            else if( tmp > sum)
+            {
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        
+        return true;
+    }
+    
+    
+};
