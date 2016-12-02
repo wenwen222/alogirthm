@@ -1,0 +1,61 @@
+class Solution {
+public:
+
+    
+    void generateString(const string& input, string& output)
+    {
+        char num = input[0];
+        char tmp;
+        char count = '1';
+        int i = 0;
+        int size = input.size();
+        
+        for(int i = 1; i < input.size(); i++)
+        {
+            tmp =  input[i]; 
+            if( tmp != num)
+            {
+                output.push_back(count);    
+                output.push_back(num);
+                count = '1';
+                num = tmp;
+            }
+            else
+            {
+                count++;
+            }
+
+        }
+        
+        output.push_back(count);
+        output.push_back(num);
+    }    
+        
+    string countAndSay(int n) {
+        
+        string input= "1";
+        string output;
+        
+        
+        int i = 1;
+        
+        if( n < 1) return output;
+        if( n == 1) return input;
+        
+        for(i = 2; i<=n; i++)
+        {
+            
+            output.clear();
+            generateString(input, output);
+            input.clear();
+            input = output;
+            
+        }
+        
+        return output;
+    }
+
+        
+        
+  
+};
