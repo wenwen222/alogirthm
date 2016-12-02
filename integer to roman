@@ -1,0 +1,113 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        
+        string result;
+        int count = 0;
+        
+        if ( num >= 1000)
+        {
+            count = num / 1000;
+            num = num - count*1000;
+            
+            for( int i = 0; i< count; i++)
+            {
+                result.push_back('M');
+            }
+        }
+        
+        //below 1000
+        if( num >= 900)
+        {
+            result.push_back('C');
+            result.push_back('M');
+            num -= 900;
+        }
+        else if( num >= 500) //500~800
+        {
+            result.push_back('D');
+            num -= 500;
+
+        }
+        else if( num >= 400)
+        {
+            result.push_back('C');
+            result.push_back('D');
+            num -= 400;
+        }
+        
+        //now below 500
+        if( num >= 100)
+        {
+            count = num /100;
+            
+            for(int i = 0; i < count; i++)
+            {
+                result.push_back('C');
+            }
+            
+            num -= count*100;
+        }
+        
+        //now below 100
+        if( num >=90)
+        {
+            result.push_back('X');
+            result.push_back('C');
+            num -= 90;
+        }
+        else if(num >= 50)
+        {
+            result.push_back('L');
+            num -= 50;
+        }
+        else if( num >= 40)
+        {
+            result.push_back('X');
+            result.push_back('L');
+            num -= 40;
+        }
+        
+        if( num >= 10)
+        {
+            count = num/10;
+            
+            for(int i = 0; i< count; i++)
+            {
+                result.push_back('X');
+            }
+            
+            num -= count*10;
+        }
+        
+        //now below 10
+        if( num >= 9)
+        {
+            result.push_back('I');
+            result.push_back('X');
+            num-=9;
+        }
+        else if(num >=5)
+        {
+            result.push_back('V');
+            num -= 5;
+        }
+        
+        
+        if( num >= 4)
+        {
+            result.push_back('I');
+            result.push_back('V');
+            num-=4;
+        }
+        
+        
+        for(int i =0; i < num; i++)
+        {
+            result.push_back('I');
+        }
+        
+        return result;
+        
+    }
+};
