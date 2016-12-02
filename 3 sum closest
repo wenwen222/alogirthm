@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        
+        std:sort(nums.begin(), nums.end());
+        
+        int ret = INT_MAX; 
+        
+        int i = 0;
+        int tmp;
+        
+        while ( i < nums.size())
+        {
+            tmp = nums[i];
+            i++;
+            twoSum(nums, target-tmp, i,ret);
+            
+            if(ret ==0 ) break;
+        }
+        
+        return (target-ret);
+    }
+    
+    bool twoSum(vector<int>& nums, int sum, int start, int& result)
+    {
+        int i = start;
+        int j = nums.size()-1;
+        int tmp;
+        int tmp1, tmp2;
+        while(i < j)
+        {
+            tmp = nums[i] + nums[j];
+            tmp1 = sum - tmp;
+            
+            result = std::abs(tmp1) < std::abs(result)? tmp1: result;
+            
+            if( tmp > sum)
+               j--;
+            else if( tmp < sum)
+               i++;
+            else 
+                return true;
+        }
+        
+        return true;
+    }
+    
+};
