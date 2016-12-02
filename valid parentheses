@@ -1,0 +1,46 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        std::stack<char> chStack;
+        char leftBrace = '{';
+        char rightBrace = '}';
+        char leftSquareBrackets = '[';
+        char rightSquareBrackets = ']';
+        char leftParenthese = '(';
+        char rightParenthese = ')';
+        
+        int size = s.size();
+        
+        if( size & 0x1) return false;
+        char tmp;
+        char poped;
+        for(int i = 0; i < size; i++)
+        {
+            tmp = s[i];
+            if( tmp == leftBrace || tmp == leftSquareBrackets || tmp == leftParenthese)
+            {
+                chStack.push(tmp);
+            }
+            else if( tmp == rightBrace || tmp == rightSquareBrackets || tmp == rightParenthese)
+            {
+                if(chStack.empty()) return false;
+                poped = chStack.top();
+                chStack.pop();
+                
+                if( ( tmp == rightBrace && poped == leftBrace) 
+                    || ( tmp == rightParenthese && poped == leftParenthese) 
+                    || ( tmp == rightSquareBrackets && poped == leftSquareBrackets) )
+                    continue;
+                else  return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        if(chStack.empty())     return true;
+        else return false;
+    }
+};
