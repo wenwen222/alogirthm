@@ -1,0 +1,81 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+         std::sort(nums.begin(),nums.end());
+         vector<vector<int>> result;
+         
+         int i = 0;
+         int tmp;
+         while( i < nums.size())
+         {
+             tmp = nums[i];
+             i++;
+             threeSum(nums, i,tmp, (target-tmp), result);
+   
+             while( i < nums.size() && nums[i] == tmp)
+               i++;            
+         }
+         
+         return result;
+    }
+    
+    void threeSum(vector<int>& nums, int start, int first, int sum, vector<vector<int>>& result) {
+        
+
+        
+        int i = start;
+        int tmp1;
+ 
+        //find zero start
+        while( i < nums.size() )
+        {
+            tmp1 = nums[i];
+            i++;
+            twoSum(nums,i,first, tmp1, (sum-tmp1), result) ;
+            
+            while( i < nums.size() && nums[i] == tmp1)
+               i++;
+            
+        }
+        
+        return ;
+    }
+    
+    bool twoSum(vector<int>& nums, int start, int first, int second, int sum, vector<vector<int>>& result)
+    {
+        int i = start;
+        int j = nums.size()-1;
+        int tmp = sum;
+        int tmp1, tmp2;
+        while(i < j)
+        {
+            tmp = nums[i] + nums[j];
+            if( tmp == sum)
+            {
+                vector<int> re;
+                re.push_back(first);
+                re.push_back(second);
+                re.push_back(nums[i]);
+                re.push_back(nums[j]);  
+                result.push_back(re);
+                tmp1 = nums[i];
+                tmp2 = nums[j];
+                while( i< nums.size() && tmp1 == nums[i] )
+                        i++;
+                while ( j < nums.size() && tmp2 == nums[j])
+                         j--;
+            }
+            else if( tmp > sum)
+            {
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        
+        return true;
+    }
+    
+};
