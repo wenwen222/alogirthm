@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        
+        int left, right;
+        left = right = n; 
+        
+        char leftp = '(';
+        char rightp = ')';
+        
+        vector<string> result;
+        string s = "";
+        gParenthesis(result, s, left, right);
+        
+        return result;
+    }
+    
+    void gParenthesis(vector<string>& result, string s, int left, int right)
+    {
+        if(left == 0 && right == 0)
+        {
+            result.push_back(s);
+            return ;
+        }
+        
+         if( left >0 ) gParenthesis(result, s+"(", left-1, right);
+         if( right > left) gParenthesis(result, s+")", left, right-1);
+       
+    };
+};
