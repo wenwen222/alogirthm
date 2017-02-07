@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        
+        //from last to begin 
+        int size = nums.size();
+        int last = nums[size-1];
+        int i = size -1;
+        for(i = size-1; i > 0; i--)
+        {
+            if(nums[i] > nums[i-1] )
+               break;
+        }
+        
+        if( i == 0)
+        {
+            //sort in ascending order
+            std::sort(nums.begin(), nums.end());
+        }
+        else
+        {
+            
+            //switch nums[i-1] with least larger value than it
+            int tmp = nums[i-1];
+            int j = size-1;
+            for(j = size-1; tmp >= nums[j] && j >=i ; j--)
+                           ;
+                           
+            nums[i-1] = nums[j];
+            nums[j] = tmp;
+            std::sort(nums.begin()+i, nums.end());
+            
+        }
+    }
+};
