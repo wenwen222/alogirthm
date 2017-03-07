@@ -1,0 +1,73 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int mL = haystack.size();
+        int strL = needle.size();
+        int size = mL - strL;
+        
+        if(strL == 0 ) return 0;
+        int index = -1;
+        int k = 0;
+        
+        for(int i = 0; i <= size ; i++)
+        {
+            for(int j = i, k = 0; k < strL; k++, j++ )
+            {
+                if( haystack[j] != needle[k])
+                {
+                    index = -1;
+                    break;
+                }
+                index = i;
+            }
+            if(index == -1) continue;
+            if( index != -1 ) return index;
+        }
+        
+        return index;
+        
+        /*int size = needle.size();
+        if( size <= 0) return 0;
+        if( haystack.size() <= 0 ) return -1;
+        int k = 0;
+        int function[size];
+        function[0] = k;
+        
+        for(int i = 1; i < size; i++)
+        {
+            while( k > 0 && needle[k] != needle[i])
+            {
+                k = function[k];
+            }
+            
+            if( needle[k] == needle[i])
+            {
+                k = k+1;
+            }
+            
+            function[i] = k;
+        }
+        
+        int p = 0;
+        for(int j = 0; j < haystack.size(); j++ )
+        {
+            while( p > 0 && haystack[j] != needle[p])
+            {
+                p = function[p-1];
+            }
+            
+            if( needle[p] == haystack[j])
+            {
+                p++;
+            }
+
+            if( p == size) return (j-size +1); 
+            
+        }
+        
+        return -1;*/
+       
+        
+        
+    }
+};
